@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Map</title>
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css">
+    <style>
+        #map {
+            height: 100vh;
+        }
+    </style>
+</head>
+<body>
+    <div id="map"></div>
+
+    <!-- Leaflet JS -->
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <!-- Custom JS for Loading Markers -->
+    <script src="functions.js"></script> <!-- Assuming this contains helper functions -->
+
+    <script>
+        // Initialize the map
+        const map = L.map('map').setView([56.95, 24.11], 7); // Centered on Latvia
+
+        // Add OpenStreetMap tiles
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors'
+        }).addTo(map);
+
+        // Load data from the uploaded JSON file
+        fetch('geomap.json') // Ensure this path matches your JSON location
+            .then(response => response.json())
+            .then(data => {
+                // Add markers from JSON data
+                data.forEach(place => {
+                    const marker = L.marker([place.lat, place.lng]).addTo(map);
+                    marker.bindPopup(`<strong>${place.name}</strong><br>${place.description}`);
+                });
+            })
+            .catch(error => console.error('Error loading JSON data:', error));
+    </script>
+</body>
+</html>
