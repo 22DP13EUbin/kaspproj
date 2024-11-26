@@ -7,13 +7,23 @@
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
     <style>
         #map {
-            height: 850px;
-            width: 100%;
+            position: absolute;
+            right: 11%;
+            top: 16%;
+            height: 650px;
+            width: 1500px;
+        }
+        .gradient-text {
+            background: linear-gradient(to right, #ff7e5f, #feb47b);
+            -webkit-background-clip: text;
+            color: transparent;
         }
     </style>
 </head>
 <body>
-    <h1>Atpūtas Vietas</h1>
+    <header>
+        <h1 class="gradient-text">Atpūtas Vietas</h1>
+    </header>
     <div id="map"></div>
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/proj4js/2.6.2/proj4.js"></script>
